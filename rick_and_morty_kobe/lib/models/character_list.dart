@@ -1,4 +1,4 @@
-import 'dart:convert';
+/*import 'dart:convert';
 
 
 class CharacterListModel {
@@ -130,3 +130,5 @@ class Location {
   factory Location.fromJson(String source) =>
       Location.fromMap(json.decode(source) as Map<String, dynamic>);
 }
+
+*/

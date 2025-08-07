@@ -1,6 +1,6 @@
 
 import 'package:dio/dio.dart';
-import 'package:rick_and_morty_kobe/models/character_list.dart';
+import 'package:rick_and_morty_kobe/models/paginated_characters.dart';
 
 class CharacterRepository {
   static final _dio = Dio(
@@ -11,9 +11,9 @@ class CharacterRepository {
   );
 
 
-static Future<CharacterListModel> getAllCharacters() async {
+static Future<PaginatedCharacters> getAllCharacters() async {
     final response = await _dio.get('/character');
-    return CharacterListModel.fromMap(response.data);
+    return PaginatedCharacters.fromMap(response.data);
 }
     
 }

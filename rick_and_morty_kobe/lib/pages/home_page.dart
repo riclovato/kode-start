@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    futureCharacters = CharacterRepository.getAllCharacters() as Future<PaginatedCharacters>;
+    futureCharacters = CharacterRepository.getAllCharacters();
     super.initState();
   } 
   
@@ -27,7 +27,18 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: appBarWidget(context),
       backgroundColor: AppColors.backgroundColor,
-      body: FutureBuilder<PaginatedCharacters>(future: futureCharacters, builder: (context, snapshot){} ,)
+      body: FutureBuilder<PaginatedCharacters>(future: futureCharacters, builder: (context, snapshot){
+        if(snapshot.hasData){
+          return Text("Oba", style: TextStyle(color: Colors.white),);
+        }
+        if(snapshot.hasError){
+          return Text('Um erro aconteceu',style: TextStyle(color: Colors.white),);
+        }
+        
+        return CircularProgressIndicator();
+          
+
+      } ,)
       
     );
   }

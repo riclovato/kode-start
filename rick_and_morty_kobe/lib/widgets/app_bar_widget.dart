@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rick_and_morty_kobe/pages/home_page.dart';
@@ -20,33 +19,25 @@ PreferredSizeWidget appBarWidget(BuildContext context,
           if (currentRoute == HomePage.routeId) return;
           Navigator.pop(context);
         },
-        child: Icon(
-          isSecondPage ? Icons.arrow_back : Icons.menu,
-          color: AppColors.white,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 12.23, left: 12.23),
+          child: Icon(
+            isSecondPage ? Icons.arrow_back : Icons.menu,
+            color: AppColors.white,
+          ),
         ),
       ),
     ),
-    actions: [
-      Container(
-        alignment: Alignment.topCenter,
-        margin: const EdgeInsets.only(right: 16),
-        child: Icon(
-          Icons.person,
-          color: AppColors.white,
-        ),
-      ),
-    ],
+ 
     flexibleSpace: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
+        child: 
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 13.98),
-                child: Icon(Icons.menu_outlined, color: AppColors.white),
-              ),
+                child: SizedBox()),
               Column(
                 children: [
                   Image.asset('assets/images/logo.png', width: 115, height: 76.99),
@@ -57,11 +48,11 @@ PreferredSizeWidget appBarWidget(BuildContext context,
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 13.98),
+                padding: const EdgeInsets.only(right: 12.23, top: 12.23),
                 child: Image.asset('assets/images/trailing-icon.png', width: 31.46, height: 31.46),
               ),
             ],
-          ),
+
         ),
       ),
     );
