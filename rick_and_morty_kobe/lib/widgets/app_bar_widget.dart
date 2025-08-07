@@ -1,17 +1,42 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:rick_and_morty_kobe/pages/home_page.dart';
 import '../themes/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-class AppBarWidget extends StatelessWidget implements PreferredSizeWidget{
-  const AppBarWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.appBarColor,
-      child: SafeArea(
+PreferredSizeWidget appBarWidget(BuildContext context,
+    {bool isSecondPage = false}) {
+  return AppBar(
+    toolbarHeight: kToolbarHeight * 2.2,
+    backgroundColor: AppColors.appBarColor,
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
+    leading: Align(
+      alignment: Alignment.topCenter,
+      child: GestureDetector(
+        onTap: () {
+          final currentRoute = ModalRoute.of(context)?.settings.name;
+          if (currentRoute == HomePage.routeId) return;
+          Navigator.pop(context);
+        },
+        child: Icon(
+          isSecondPage ? Icons.arrow_back : Icons.menu,
+          color: AppColors.white,
+        ),
+      ),
+    ),
+    actions: [
+      Container(
+        alignment: Alignment.topCenter,
+        margin: const EdgeInsets.only(right: 16),
+        child: Icon(
+          Icons.person,
+          color: AppColors.white,
+        ),
+      ),
+    ],
+    flexibleSpace: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
@@ -40,8 +65,5 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget{
         ),
       ),
     );
-  }
+    }
   
-  @override
-  Size get preferredSize => Size.fromHeight(130.92);
-}

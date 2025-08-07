@@ -10,6 +10,7 @@ void main() {
 
 class RickAndMortyApp extends StatelessWidget {
   const RickAndMortyApp({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +23,14 @@ class RickAndMortyApp extends StatelessWidget {
               builder: (context) => const HomePage(),
             );
             case DetailsPage.routeId:
-            return MaterialPageRoute(
-              settings: settings,
-              builder: (context) => const DetailsPage(),
-            );
-          default:
-            return null;
-            
+              int characterId = settings.arguments as int;
+              return MaterialPageRoute(
+                settings: settings,
+                builder: (context) => DetailsPage(characterId: characterId,),
+              );
+            default:
+              return null;
+              
         }
       },
     );
