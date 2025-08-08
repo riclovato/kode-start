@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty_kobe/models/detailed_character.dart';
 import 'package:rick_and_morty_kobe/themes/app_colors.dart';
 
-
 class CharacterCard extends StatelessWidget {
   const CharacterCard({required this.character, required this.onTap, Key? key})
       : super(key: key);
@@ -12,7 +11,6 @@ class CharacterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Card(
       color: AppColors.primaryColorLight,
       clipBehavior: Clip.antiAlias,
@@ -25,9 +23,18 @@ class CharacterCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           /* Image.network(
-              ,
-            ),*/
+            LayoutBuilder(
+              builder: (context, constraints) {
+                return AspectRatio(
+                  aspectRatio: 320 / 160,
+                  child: Image.network(
+                    'https://rickandmortyapi.com/api/character/avatar/${character.id}.jpeg',
+                    fit: BoxFit.cover,
+                    width: constraints.maxWidth,
+                  ),
+                );
+              },
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Text(
