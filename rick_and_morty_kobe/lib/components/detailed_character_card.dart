@@ -52,11 +52,11 @@ class DetailedCharacterCard extends StatelessWidget {
                       Icons.circle,
                       size: 10,
                       color:
-                          (detailedCharacter.status ?? 'unknown')
+                          (detailedCharacter.status)
                                   .toLowerCase() ==
                               'alive'
                           ? Colors.green
-                          : (detailedCharacter.status ?? 'unknown')
+                          : (detailedCharacter.status)
                                     .toLowerCase() ==
                                 'dead'
                           ? Colors.red
@@ -98,7 +98,7 @@ class DetailedCharacterCard extends StatelessWidget {
                   style: TextStyle(color: Colors.white70, fontSize: 12),
                 ),
                 Text(
-                  detailedCharacter.episode.first,
+                  detailedCharacter.firstEpisodeName ?? 'Unknown',
                   style: const TextStyle(color: Colors.white, fontSize: 14),
                 ),
               ],

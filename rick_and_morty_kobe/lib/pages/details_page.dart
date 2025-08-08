@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty_kobe/components/character_card.dart';
 import 'package:rick_and_morty_kobe/components/detailed_character_card.dart';
 import 'package:rick_and_morty_kobe/models/detailed_character.dart';
 import 'package:rick_and_morty_kobe/repositories/character_repository.dart';

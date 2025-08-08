@@ -1,4 +1,3 @@
-
 class DetailedCharacter {
   DetailedCharacter({
     required this.id,
@@ -13,6 +12,7 @@ class DetailedCharacter {
     required this.episode,
     required this.url,
     required this.created,
+    required this.firstEpisodeName,
   });
 
   final int id;
@@ -27,6 +27,7 @@ class DetailedCharacter {
   final List<String> episode;
   final String url;
   final String created;
+  final String? firstEpisodeName;
 
   factory DetailedCharacter.fromJson(Map<String, dynamic> json) {
     return DetailedCharacter(
@@ -42,6 +43,7 @@ class DetailedCharacter {
       episode: List<String>.from(json['episode']),
       url: json['url'],
       created: json['created'],
+      firstEpisodeName: json['firstEpisodeName'] ?? 'Unknown',
     );
   }
 
@@ -64,49 +66,31 @@ class DetailedCharacter {
 }
 
 class Origin {
-  Origin({
-    required this.name,
-    required this.url,
-  });
+  Origin({required this.name, required this.url});
 
   final String name;
   final String url;
 
   factory Origin.fromJson(Map<String, dynamic> json) {
-    return Origin(
-      name: json['name'],
-      url: json['url'],
-    );
+    return Origin(name: json['name'], url: json['url']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'url': url,
-    };
+    return {'name': name, 'url': url};
   }
 }
 
 class Location {
-  Location({
-    required this.name,
-    required this.url,
-  });
+  Location({required this.name, required this.url});
 
   final String name;
   final String url;
 
   factory Location.fromJson(Map<String, dynamic> json) {
-    return Location(
-      name: json['name'],
-      url: json['url'],
-    );
+    return Location(name: json['name'], url: json['url']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'url': url,
-    };
+    return {'name': name, 'url': url};
   }
 }
