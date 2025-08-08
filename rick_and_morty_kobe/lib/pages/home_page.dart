@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rick_and_morty_kobe/components/character_card.dart';
 import 'package:rick_and_morty_kobe/models/paginated_characters.dart';
 import 'package:rick_and_morty_kobe/repositories/character_repository.dart';
 import 'package:rick_and_morty_kobe/themes/app_colors.dart';
@@ -18,7 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    //futureCharacters = CharacterRepository.getAllCharacters();
+    futureCharacters = CharacterRepository.getAllCharacters();
     super.initState();
   } 
   
@@ -29,7 +30,20 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: AppColors.backgroundColor,
       body: FutureBuilder<PaginatedCharacters>(future: futureCharacters, builder: (context, snapshot){
         if(snapshot.hasData){
-          return Text("Oba", style: TextStyle(color: Colors.white),);
+          final data = snapshot.data;
+          if(data == null){
+            return Text('Nenhum personagem encontrado', style: TextStyle(color: Colors.white),);}
+          return ListView.builder(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            itemCount: data.results.length,
+            itemBuilder: (context,index){
+              return CharacterCard(
+                character: data.results[index],
+                 onTap: (){
+                  print('Personagem ${data.results[index].name} clicado');
+                 });
+            }
+          );
         }
         if(snapshot.hasError){
           return Text('Um erro aconteceu',style: TextStyle(color: Colors.white),);

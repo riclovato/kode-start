@@ -4,8 +4,10 @@ import 'package:rick_and_morty_kobe/pages/home_page.dart';
 import '../themes/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-PreferredSizeWidget appBarWidget(BuildContext context,
-    {bool isSecondPage = false}) {
+PreferredSizeWidget appBarWidget(
+  BuildContext context, {
+  bool isSecondPage = false,
+}) {
   return AppBar(
     toolbarHeight: 130.92,
     backgroundColor: AppColors.appBarColor,
@@ -31,7 +33,6 @@ PreferredSizeWidget appBarWidget(BuildContext context,
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // Logo + texto centralizados
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -47,7 +48,6 @@ PreferredSizeWidget appBarWidget(BuildContext context,
             ],
           ),
 
-          // Ícone da direita
           Align(
             alignment: Alignment.topRight,
             child: Padding(

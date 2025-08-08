@@ -13,7 +13,7 @@ class CharacterRepository {
 
 static Future<PaginatedCharacters> getAllCharacters() async {
     final response = await _dio.get('/character');
-    return PaginatedCharacters.fromMap(response.data);
+    return PaginatedCharacters.fromJson(response.data);
 }
     
 }

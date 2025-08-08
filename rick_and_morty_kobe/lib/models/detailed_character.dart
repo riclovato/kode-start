@@ -1,20 +1,6 @@
-import 'dart:convert';
 
-class Character {
-  final int id;
-  final String name;
-  final String status;
-  final String species;
-  final String type;
-  final String gender;
-  final Origin origin;
-  final Location location;
-  final String image;
-  final List<String> episode;
-  final String url;
-  final String created;
-
-  Character({
+class DetailedCharacter {
+  DetailedCharacter({
     required this.id,
     required this.name,
     required this.status,
@@ -29,49 +15,98 @@ class Character {
     required this.created,
   });
 
-  factory Character.fromMap(Map<String, dynamic> map) {
-    return Character(
-      id: map['id'] as int,
-      name: map['name'] as String,
-      status: map['status'] as String,
-      species: map['species'] as String,
-      type: map['type'] as String,
-      gender: map['gender'] as String,
-      origin: Origin.fromMap(map['origin'] as Map<String, dynamic>),
-      location: Location.fromMap(map['location'] as Map<String, dynamic>),
-      image: map['image'] as String,
-      episode: List<String>.from(map['episode'] as List<dynamic>),
-      url: map['url'] as String,
-      created: map['created'] as String,
+  final int id;
+  final String name;
+  final String status;
+  final String species;
+  final String type;
+  final String gender;
+  final Origin origin;
+  final Location location;
+  final String image;
+  final List<String> episode;
+  final String url;
+  final String created;
+
+  factory DetailedCharacter.fromJson(Map<String, dynamic> json) {
+    return DetailedCharacter(
+      id: json['id'],
+      name: json['name'],
+      status: json['status'],
+      species: json['species'],
+      type: json['type'],
+      gender: json['gender'],
+      origin: Origin.fromJson(json['origin']),
+      location: Location.fromJson(json['location']),
+      image: json['image'],
+      episode: List<String>.from(json['episode']),
+      url: json['url'],
+      created: json['created'],
     );
   }
 
-  factory Character.fromJson(String source) =>
-      Character.fromMap(json.decode(source) as Map<String, dynamic>);
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'status': status,
+      'species': species,
+      'type': type,
+      'gender': gender,
+      'origin': origin.toJson(),
+      'location': location.toJson(),
+      'image': image,
+      'episode': episode,
+      'url': url,
+      'created': created,
+    };
+  }
 }
 
 class Origin {
+  Origin({
+    required this.name,
+    required this.url,
+  });
+
   final String name;
   final String url;
-  Origin({required this.name, required this.url});
 
-  factory Origin.fromMap(Map<String, dynamic> map) {
-    return Origin(name: map['name'] as String, url: map['url'] as String);
+  factory Origin.fromJson(Map<String, dynamic> json) {
+    return Origin(
+      name: json['name'],
+      url: json['url'],
+    );
   }
 
-  factory Origin.fromJson(String source) =>
-      Origin.fromMap(json.decode(source) as Map<String, dynamic>);
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'url': url,
+    };
+  }
 }
 
 class Location {
+  Location({
+    required this.name,
+    required this.url,
+  });
+
   final String name;
   final String url;
-  Location({required this.name, required this.url});
 
-  factory Location.fromMap(Map<String, dynamic> map) {
-    return Location(name: map['name'] as String, url: map['url'] as String);
+  factory Location.fromJson(Map<String, dynamic> json) {
+    return Location(
+      name: json['name'],
+      url: json['url'],
+    );
   }
 
-  factory Location.fromJson(String source) =>
-      Location.fromMap(json.decode(source) as Map<String, dynamic>);
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'url': url,
+    };
+  }
 }
