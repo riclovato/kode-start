@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    futureCharacters = CharacterRepository.getAllCharacters();
+    //futureCharacters = CharacterRepository.getAllCharacters();
     super.initState();
   } 
   

@@ -4,11 +4,10 @@ import 'package:rick_and_morty_kobe/pages/home_page.dart';
 import '../themes/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 PreferredSizeWidget appBarWidget(BuildContext context,
     {bool isSecondPage = false}) {
   return AppBar(
-    toolbarHeight: kToolbarHeight * 2.2,
+    toolbarHeight: 130.92,
     backgroundColor: AppColors.appBarColor,
     systemOverlayStyle: SystemUiOverlayStyle.dark,
     leading: Align(
@@ -28,33 +27,40 @@ PreferredSizeWidget appBarWidget(BuildContext context,
         ),
       ),
     ),
- 
     flexibleSpace: SafeArea(
-        child: 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          // Logo + texto centralizados
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 13.98),
-                child: SizedBox()),
-              Column(
-                children: [
-                  Image.asset('assets/images/logo.png', width: 115, height: 76.99),
-                  Text('RICK AND MORTY API',style: GoogleFonts.lato( 
-                        color: AppColors.white,
-                        fontSize: 14.5,
-                        fontWeight: FontWeight.w400,))
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 12.23, top: 12.23),
-                child: Image.asset('assets/images/trailing-icon.png', width: 31.46, height: 31.46),
+              Image.asset('assets/images/logo.png', width: 115, height: 76.99),
+              Text(
+                'RICK AND MORTY API',
+                style: GoogleFonts.lato(
+                  color: AppColors.white,
+                  fontSize: 14.5,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ],
+          ),
 
-        ),
+          // Ícone da direita
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 12.23, top: 12.23),
+              child: Image.asset(
+                'assets/images/trailing-icon.png',
+                width: 31.46,
+                height: 31.46,
+              ),
+            ),
+          ),
+        ],
       ),
-    );
-    }
-  
+    ),
+  );
+}
