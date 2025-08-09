@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   List<DetailedCharacter> characters = [];
   int currentPage = 1;
   bool isLoadingMore = false;
+  bool hasMore = true;
   late ScrollController _scrollController;
 
   @override
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
 
   void _onScroll() {
     if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 200 &&
-        !isLoadingMore) {
+        !isLoadingMore && hasMore) {
       _loadCharacters();
     }
   }
@@ -42,6 +43,7 @@ class _HomePageState extends State<HomePage> {
       characters.addAll(data.results);
       currentPage++;
       isLoadingMore = false;
+      hasMore = data.next != null;
     });
   }
 

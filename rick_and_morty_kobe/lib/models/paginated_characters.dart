@@ -11,7 +11,7 @@ class PaginatedCharacters {
 
   final int count;
   final int pages;
-  final String next;
+  final String? next;
   final String? prev;
   final List<DetailedCharacter> results;
 

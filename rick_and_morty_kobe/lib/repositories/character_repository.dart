@@ -29,4 +29,15 @@ class CharacterRepository {
 
     return DetailedCharacter.fromJson(data);
   }
+
+  static Future<PaginatedCharacters> getByName(String name, {int page = 1}) async {
+  final response = await _dio.get(
+    '/character',
+    queryParameters: {
+      'name': name,
+      'page': page,
+    },
+  );
+  return PaginatedCharacters.fromJson(response.data);
+}
 }
