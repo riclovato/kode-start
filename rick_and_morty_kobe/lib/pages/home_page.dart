@@ -21,13 +21,15 @@ class _HomePageState extends State<HomePage> {
   bool isLoadingMore = false;
   bool hasMore = true;
   late ScrollController _scrollController;
+  String? selectedStatus;
+  String? selectedGender;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_onScroll);
-    _loadCharacters();
+    _loadCharacters(reset: true);
   }
 
   void _onScroll() {
@@ -39,9 +41,21 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Future<void> _loadCharacters() async {
+  Future<void> _loadCharacters({bool reset = false}) async {
+    if (reset) {
+      setState(() {
+        characters.clear();
+        currentPage = 1;
+        hasMore = true;
+      });
+    }
+
     setState(() => isLoadingMore = true);
-    final data = await CharacterRepository.getAllCharacters(page: currentPage);
+    final data = await CharacterRepository.getAllCharacters(
+      page: currentPage,
+      status: selectedStatus,
+      gender: selectedGender,
+    );
     setState(() {
       characters.addAll(data.results);
       currentPage++;
@@ -59,14 +73,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarWidget(context,
-     actions: [
-    IconButton(
-      icon: const Icon(Icons.filter_list, color: Colors.white),
-      onPressed: _openFilterModal,
-     
-     
-      ),]),
+      appBar: appBarWidget(
+        context,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.filter_list, color: Colors.white),
+            onPressed: _openFilterModal,
+          ),
+        ],
+      ),
       backgroundColor: AppColors.backgroundColor,
       body: characters.isEmpty
           ? const Center(child: CircularProgressIndicator())
@@ -93,16 +108,29 @@ class _HomePageState extends State<HomePage> {
               },
             ),
     );
-
-    
   }
-  
-void _openFilterModal() async {
-  final filtroSelected = await showFilterModal(context);
-  if (filtroSelected != null) {
-    print('Selected Filter: $filtroSelected');
-    
+
+  void _openFilterModal() async {
+    final filtroSelected = await showFilterModal(
+      context,
+      initialStatus: selectedStatus,
+      initialGender: selectedGender,
+    );
+    if (filtroSelected != null) {
+      if (filtroSelected['status'] == null &&
+          filtroSelected['gender'] == null) {
+        setState(() {
+          selectedStatus = null;
+          selectedGender = null;
+        });
+        _loadCharacters(reset: true);
+        return;
+      }
+      setState(() {
+        selectedStatus = filtroSelected['status'];
+        selectedGender = filtroSelected['gender'];
+      });
+      _loadCharacters(reset: true);
+    }
   }
 }
-}
-

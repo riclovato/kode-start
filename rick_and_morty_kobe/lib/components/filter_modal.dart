@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
-Future<Map<String, String?>?> showFilterModal(BuildContext context) {
-  String? statusSelected;
-  String? genderSelected;
+Future<Map<String, String?>?> showFilterModal(
+  BuildContext context, {
+  String? initialStatus,
+  String? initialGender,
+}) {
+  String? statusSelected = initialStatus;
+  String? genderSelected = initialGender;
 
   return showModalBottomSheet<Map<String, String?>?>(
     context: context,
@@ -19,18 +23,13 @@ Future<Map<String, String?>?> showFilterModal(BuildContext context) {
               children: [
                 const Text(
                   'Filters',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16),
 
-               
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +40,7 @@ Future<Map<String, String?>?> showFilterModal(BuildContext context) {
                           ),
                           RadioListTile<String>(
                             title: const Text('Alive'),
-                            value: 'Alive',
+                            value: 'alive',
                             groupValue: statusSelected,
                             onChanged: (value) {
                               setState(() {
@@ -51,7 +50,7 @@ Future<Map<String, String?>?> showFilterModal(BuildContext context) {
                           ),
                           RadioListTile<String>(
                             title: const Text('Dead'),
-                            value: 'Dead',
+                            value: 'dead',
                             groupValue: statusSelected,
                             onChanged: (value) {
                               setState(() {
@@ -61,7 +60,7 @@ Future<Map<String, String?>?> showFilterModal(BuildContext context) {
                           ),
                           RadioListTile<String>(
                             title: const Text('Unknown'),
-                            value: 'Unknown',
+                            value: 'unknown',
                             groupValue: statusSelected,
                             onChanged: (value) {
                               setState(() {
@@ -73,7 +72,6 @@ Future<Map<String, String?>?> showFilterModal(BuildContext context) {
                       ),
                     ),
 
-                   
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +128,7 @@ Future<Map<String, String?>?> showFilterModal(BuildContext context) {
 
                 const SizedBox(height: 10),
 
-               
+                // Botões
                 Row(
                   children: [
                     Expanded(
@@ -140,7 +138,10 @@ Future<Map<String, String?>?> showFilterModal(BuildContext context) {
                           foregroundColor: Colors.black,
                         ),
                         onPressed: () {
-                          Navigator.pop(context, null);
+                          Navigator.pop(context, {
+                            'status': null,
+                            'gender': null,
+                          });
                         },
                         child: const Text('Reset'),
                       ),
@@ -158,7 +159,7 @@ Future<Map<String, String?>?> showFilterModal(BuildContext context) {
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           );
