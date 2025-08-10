@@ -7,13 +7,30 @@ class CharacterRepository {
     BaseOptions(baseUrl: 'https://rickandmortyapi.com/api'),
   );
 
-  static Future<PaginatedCharacters> getAllCharacters({int page = 1}) async {
-    final response = await _dio.get(
-      '/character',
-      queryParameters: {'page': page},
-    );
-    return PaginatedCharacters.fromJson(response.data);
-  }
+  static Future<PaginatedCharacters> getAllCharacters({
+  int page = 1,
+  String? name,
+  String? status,
+  String? species,
+  String? type,
+  String? gender,
+}) async {
+  final queryParams = {
+    'page': page,
+    if (name != null && name.isNotEmpty) 'name': name,
+    if (status != null && status.isNotEmpty) 'status': status,
+    if (species != null && species.isNotEmpty) 'species': species,
+    if (type != null && type.isNotEmpty) 'type': type,
+    if (gender != null && gender.isNotEmpty) 'gender': gender,
+  };
+
+  final response = await _dio.get(
+    '/character',
+    queryParameters: queryParams,
+  );
+
+  return PaginatedCharacters.fromJson(response.data);
+}
 
   static Future<DetailedCharacter> getCharacterDetails(int id) async {
     final response = await _dio.get('/character/$id');
@@ -30,14 +47,7 @@ class CharacterRepository {
     return DetailedCharacter.fromJson(data);
   }
 
-  static Future<PaginatedCharacters> getByName(String name, {int page = 1}) async {
-  final response = await _dio.get(
-    '/character',
-    queryParameters: {
-      'name': name,
-      'page': page,
-    },
-  );
-  return PaginatedCharacters.fromJson(response.data);
-}
+
+  
+
 }

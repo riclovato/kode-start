@@ -13,6 +13,7 @@ class DetailedCharacter {
     required this.url,
     required this.created,
     required this.firstEpisodeName,
+    required this.episodeCount,
   });
 
   final int id;
@@ -28,6 +29,7 @@ class DetailedCharacter {
   final String url;
   final String created;
   final String? firstEpisodeName;
+  final int episodeCount; 
 
   factory DetailedCharacter.fromJson(Map<String, dynamic> json) {
     return DetailedCharacter(
@@ -44,6 +46,8 @@ class DetailedCharacter {
       url: json['url'],
       created: json['created'],
       firstEpisodeName: json['firstEpisodeName'] ?? 'Unknown',
+      episodeCount: json['episode'] != null ? json['episode'].length : 0,
+      
     );
   }
 

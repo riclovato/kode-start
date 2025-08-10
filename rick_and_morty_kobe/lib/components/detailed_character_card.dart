@@ -101,6 +101,10 @@ class DetailedCharacterCard extends StatelessWidget {
                   detailedCharacter.firstEpisodeName ?? 'Unknown',
                   style: const TextStyle(color: Colors.white, fontSize: 14),
                 ),
+                Text(
+                  '${detailedCharacter.name} appears in ${detailedCharacter.episodeCount} episode(s)',
+                  style: const TextStyle(color: Colors.white, fontSize: 14),
+                ),
               ],
             ),
           ),

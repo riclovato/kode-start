@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 PreferredSizeWidget appBarWidget(
   BuildContext context, {
   bool isSecondPage = false,
+  List<Widget>? actions,
 }) {
   return AppBar(
     toolbarHeight: 130.92,
@@ -29,6 +30,7 @@ PreferredSizeWidget appBarWidget(
         ),
       ),
     ),
+    actions: actions,
     flexibleSpace: SafeArea(
       child: Stack(
         alignment: Alignment.center,

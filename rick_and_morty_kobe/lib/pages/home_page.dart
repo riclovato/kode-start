@@ -5,6 +5,7 @@ import 'package:rick_and_morty_kobe/pages/details_page.dart';
 import 'package:rick_and_morty_kobe/repositories/character_repository.dart';
 import 'package:rick_and_morty_kobe/themes/app_colors.dart';
 import 'package:rick_and_morty_kobe/widgets/app_bar_widget.dart';
+import 'package:rick_and_morty_kobe/components/filter_modal.dart';
 
 class HomePage extends StatefulWidget {
   static const routeId = '/';
@@ -30,8 +31,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 200 &&
-        !isLoadingMore && hasMore) {
+    if (_scrollController.position.pixels >=
+            _scrollController.position.maxScrollExtent - 200 &&
+        !isLoadingMore &&
+        hasMore) {
       _loadCharacters();
     }
   }
@@ -56,7 +59,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarWidget(context),
+      appBar: appBarWidget(context,
+     actions: [
+    IconButton(
+      icon: const Icon(Icons.filter_list, color: Colors.white),
+      onPressed: _openFilterModal,
+     
+     
+      ),]),
       backgroundColor: AppColors.backgroundColor,
       body: characters.isEmpty
           ? const Center(child: CircularProgressIndicator())
@@ -83,5 +93,16 @@ class _HomePageState extends State<HomePage> {
               },
             ),
     );
+
+    
+  }
+  
+void _openFilterModal() async {
+  final filtroSelected = await showFilterModal(context);
+  if (filtroSelected != null) {
+    print('Selected Filter: $filtroSelected');
+    
   }
 }
+}
+
