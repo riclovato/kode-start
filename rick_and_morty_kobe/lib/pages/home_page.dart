@@ -23,6 +23,8 @@ class _HomePageState extends State<HomePage> {
   late ScrollController _scrollController;
   String? selectedStatus;
   String? selectedGender;
+  TextEditingController _searchController = TextEditingController();
+  String searchQuery = "";
 
   @override
   void initState() {
@@ -55,6 +57,7 @@ class _HomePageState extends State<HomePage> {
       page: currentPage,
       status: selectedStatus,
       gender: selectedGender,
+      name: searchQuery.isNotEmpty ? searchQuery : null,
     );
     setState(() {
       characters.addAll(data.results);
@@ -67,6 +70,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     _scrollController.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -83,30 +87,65 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       backgroundColor: AppColors.backgroundColor,
-      body: characters.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              controller: _scrollController,
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              itemCount: characters.length + (isLoadingMore ? 1 : 0),
-              itemBuilder: (context, index) {
-                if (index == characters.length) {
-                  return const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    child: Center(child: CircularProgressIndicator()),
-                  );
-                }
-                return CharacterCard(
-                  character: characters[index],
-                  onTap: () {
-                    Navigator.of(context).pushNamed(
-                      DetailsPage.routeId,
-                      arguments: characters[index].id,
-                    );
-                  },
-                );
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'Search characters...',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              onSubmitted: (value) {
+                setState(() {
+                  searchQuery = value;
+                });
+                _loadCharacters(reset: true);
               },
             ),
+          ),
+
+          Expanded(
+            child: characters.isEmpty
+                ? (isLoadingMore
+                      ? const Center(child: CircularProgressIndicator())
+                      : const Center(
+                          child: Text(
+                            'No characters found.',
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                        ))
+                : ListView.builder(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    itemCount: characters.length + (isLoadingMore ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index == characters.length) {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+                      return CharacterCard(
+                        character: characters[index],
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            DetailsPage.routeId,
+                            arguments: characters[index].id,
+                          );
+                        },
+                      );
+                    },
+                  ),
+          ),
+        ],
+      ),
     );
   }
 

@@ -8,29 +8,46 @@ class CharacterRepository {
   );
 
   static Future<PaginatedCharacters> getAllCharacters({
-  int page = 1,
-  String? name,
-  String? status,
-  String? species,
-  String? type,
-  String? gender,
-}) async {
-  final queryParams = {
-    'page': page,
-    if (name != null && name.isNotEmpty) 'name': name,
-    if (status != null && status.isNotEmpty) 'status': status,
-    if (species != null && species.isNotEmpty) 'species': species,
-    if (type != null && type.isNotEmpty) 'type': type,
-    if (gender != null && gender.isNotEmpty) 'gender': gender,
-  };
+    int page = 1,
+    String? name,
+    String? status,
+    String? species,
+    String? type,
+    String? gender,
+  }) async {
+    final queryParams = {
+      'page': page,
+      if (name != null && name.isNotEmpty) 'name': name,
+      if (status != null && status.isNotEmpty) 'status': status,
+      if (species != null && species.isNotEmpty) 'species': species,
+      if (type != null && type.isNotEmpty) 'type': type,
+      if (gender != null && gender.isNotEmpty) 'gender': gender,
+    };
 
-  final response = await _dio.get(
-    '/character',
-    queryParameters: queryParams,
-  );
+    try {
+      final response = await _dio.get(
+        '/character',
+        queryParameters: queryParams,
+      );
 
-  return PaginatedCharacters.fromJson(response.data);
-}
+      return PaginatedCharacters.fromJson(response.data);
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        return PaginatedCharacters(
+          results: [],
+          next: null,
+          prev: null,
+          count: 0,
+          pages: 0,
+        );
+      }
+
+      rethrow;
+    } catch (e) {
+      print('Error getting characters: $e');
+      rethrow;
+    }
+  }
 
   static Future<DetailedCharacter> getCharacterDetails(int id) async {
     final response = await _dio.get('/character/$id');
@@ -46,8 +63,4 @@ class CharacterRepository {
 
     return DetailedCharacter.fromJson(data);
   }
-
-
-  
-
 }
