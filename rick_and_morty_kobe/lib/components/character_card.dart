@@ -4,7 +4,7 @@ import 'package:rick_and_morty_kobe/themes/app_colors.dart';
 
 class CharacterCard extends StatelessWidget {
   const CharacterCard({required this.character, required this.onTap, Key? key})
-      : super(key: key);
+    : super(key: key);
 
   final DetailedCharacter character;
   final void Function() onTap;
@@ -21,16 +21,18 @@ class CharacterCard extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             LayoutBuilder(
               builder: (context, constraints) {
                 return AspectRatio(
                   aspectRatio: 320 / 160,
+
                   child: Image.network(
                     'https://rickandmortyapi.com/api/character/avatar/${character.id}.jpeg',
                     fit: BoxFit.cover,
                     width: constraints.maxWidth,
+                    alignment: Alignment.center,
                   ),
                 );
               },
