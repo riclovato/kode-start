@@ -44,43 +44,43 @@ O app segue o protótipo no Figma e implementa as funcionalidades obrigatórias 
 **Rolagem Infinita**
 
 <p align="center">
-  <img src="rick_and_morty_kobe/gifs/rolagem_infinita.gif" alt="Rolagem Infinita" width="400"/>
+  <img src="gifs/rolagem_infinita.gif" alt="Rolagem Infinita" width="400"/>
 </p>
 
 **Navegação para a página de detalhes e de volta a homePage**
 
 <p align="center">
-  <img src="rick_and_morty_kobe/gifs/navegacao_detalhes.gif" alt="Navegação até detalhes" width="400"/>
+  <img src="gifs/navegacao_detalhes.gif" alt="Navegação até detalhes" width="400"/>
 </p>
 
 **Card de personagem detalhado**
 
 <p align="center">
-  <img src="rick_and_morty_kobe/gifs/details.jpg" alt="Card de Detalhes" width="400"/>
+  <img src="gifs/details.jpg" alt="Card de Detalhes" width="400"/>
 </p>
 
 **Busca por Nome**
 
 <p align="center">
-  <img src="rick_and_morty_kobe/gifs/busca_nome.gif" alt="Busca Personagem" width="400"/>
+  <img src="gifs/busca_nome.gif" alt="Busca Personagem" width="400"/>
 </p>
 
 **Nome não encontrado**
 
 <p align="center">
-  <img src="rick_and_morty_kobe/gifs/nome_not_found.gif" alt="Nome não encontrado" width="400"/>
+  <img src="gifs/nome_not_found.gif" alt="Nome não encontrado" width="400"/>
 </p>
 
 **Filtros**
 
 <p align="center">
-  <img src="rick_and_morty_kobe/gifs/filtros.gif" alt="Filtros" width="400"/>
+  <img src="gifs/filtros.gif" alt="Filtros" width="400"/>
 </p>
 
 **Reset do Filtro**
 
 <p align="center">
-  <img src="rick_and_morty_kobe/gifs/reset_filtro.gif" alt="Reset do Filtro" width="400"/>
+  <img src="gifs/reset_filtro.gif" alt="Reset do Filtro" width="400"/>
 </p>
 
 [Link para o vídeo](https://drive.google.com/file/d/1PLXCUB7H0u6MBn3D85yZ4OPJQuBR740_/view?usp=sharing)
